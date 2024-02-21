@@ -3,6 +3,7 @@
 This project demonstrates how to create an interactive web map for sharing geospatial projects. The web map consists of a single HTML file that uses Bootstrap to simplify styling. The map itself is rendered by MapLibre GL JS. Data is stored in the PMTiles format, a single-file format that simple to use and easy to deploy, making it a great choice for small to medium-sized datasets. Together, these packages make it possible to serve a fully-featured web map with static hosting services such as GitHub Pages.
 
 This project was created by Philip Mathieu. If you like my work, consider [buying me a coffee](https://www.buymeacoffee.com/philipmathieu)!
+
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/philipmathieu)
 
 ## 1. Prepare Dataset
