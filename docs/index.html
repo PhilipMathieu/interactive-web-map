@@ -96,12 +96,16 @@
         let protocol = new pmtiles.Protocol();
         maplibregl.addProtocol("pmtiles", protocol.tile);
 
+        // Initialize the map
         const map = new maplibregl.Map({
             container: 'map', // container ID
             style: 'https://api.maptiler.com/maps/satellite/style.json?key=hhRnxfv423ZJi2JiGt95', // style URL, replace with your own style if necessary
-            center: [0, 0], // starting position [lng, lat]
-            zoom: 1 // starting zoom
+            center: [-95, 38], // starting position [lng, lat]
+            zoom: 4 // starting zoom
         });
+
+        // Add zoom and rotation controls to the map.
+        map.addControl(new maplibregl.NavigationControl());
 
 
         // Example of adding a PMTiles source and layer to your map
@@ -117,7 +121,7 @@
                 'source-layer': 'ski_areas_all',
                 'paint': {
                     'circle-radius': 6,
-                    'circle-color': '#B42222'
+                    'circle-color': 'rgba(255,255,255,0.5)'
                 }
             });
         });
