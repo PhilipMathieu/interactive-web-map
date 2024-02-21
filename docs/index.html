@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Map Template</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MapLibre GL CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css">
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            /* Override Bootstrap colors */
+            --bs-primary: #007bff;
+            /* Primary color */
+            --bs-secondary: #6c757d;
+            /* Secondary color */
+            --bs-success: #28a745;
+            /* Success color */
+            --bs-danger: #dc3545;
+            /* Danger color */
+            --bs-warning: #ffc107;
+            /* Warning color */
+            --bs-info: #17a2b8;
+            /* Info color */
+            --bs-light: #f8f9fa;
+            /* Light color */
+            --bs-dark: #343a40;
+            /* Dark color */
+            --bs-font-sans-serif: "Inter", sans-serif;
+            /* Override default font */
+        }
+
+        #map {
+            width: 100%;
+            height: 75vh;
+            /* Adjust height as needed */
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="header bg-primary text-white text-center p-5">
+        <h1 class="">Interactive Web Map</h1>
+    </div>
+
+    <div id="map" class=""></div>
+
+    <div class="content-section p-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h2>About</h2>
+                <p>This template is designed to help Python programmers quickly deploy interactive web maps. It
+                    leverages
+                    Bootstrap for styling and MapLibre for rendering a satellite imagery basemap. You can host this as a
+                    static
+                    site on platforms like GitHub Pages.</p>
+            </div>
+            <div class="col-md-10">
+                <h2>Contact</h2>
+                <p>For more information or to contribute to this project, please contact us through our GitHub
+                    repository.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row footer bg-light p-5 pb-0">
+        <div class="col-md-6">
+            <h2>License</h2>
+            <p>This project is licensed under the MIT License. For more information, please see the LICENSE file in the
+                GitHub repository.</p>
+        </div>
+        <div class="col-md-6">
+            <h2>Acknowledgements</h2>
+            <p>Satellite imagery by MapTiler Cloud. Ski areas layer obtained from NOAA NWS National Operational
+                Hydrologic Remote Sensing Center</p>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+    <!-- PMTiles JS -->
+    <script src="https://unpkg.com/pmtiles@3.0.3/dist/pmtiles.js"></script>
+    <!-- Map JS -->
+    <script type="module">
+        // Setup PMTiles protocol with your map instance
+        let protocol = new pmtiles.Protocol();
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+
+        const map = new maplibregl.Map({
+            container: 'map', // container ID
+            style: 'https://api.maptiler.com/maps/satellite/style.json?key=hhRnxfv423ZJi2JiGt95', // style URL, replace with your own style if necessary
+            center: [0, 0], // starting position [lng, lat]
+            zoom: 1 // starting zoom
+        });
+
+
+        // Example of adding a PMTiles source and layer to your map
+        map.on('load', function () {
+            map.addSource('skiAreas', {
+                'type': 'vector',
+                'url': 'pmtiles://tiles/ski_areas_all.pmtiles'
+            });
+            map.addLayer({
+                'id': 'skiAreasCircles',
+                'type': 'circle',
+                'source': 'skiAreas',
+                'source-layer': 'ski_areas_all',
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': '#B42222'
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
