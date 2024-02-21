@@ -58,15 +58,14 @@
             <div class="col-md-10">
                 <h2>About</h2>
                 <p>This template is designed to help Python programmers quickly deploy interactive web maps. It
-                    leverages
-                    Bootstrap for styling and MapLibre for rendering a satellite imagery basemap. You can host this as a
-                    static
-                    site on platforms like GitHub Pages.</p>
+                    leverages Bootstrap for styling and MapLibre for rendering the map. An example data source is loaded
+                    with Protomaps' PMTiles spec. You can host this as a
+                    static site on platforms like GitHub Pages.</p>
             </div>
             <div class="col-md-10">
                 <h2>Contact</h2>
-                <p>For more information or to contribute to this project, please contact us through our GitHub
-                    repository.</p>
+                <p>For more information or to contribute to this project, see our <a
+                        href="https://github.com/PhilipMathieu/interactive-web-map/">GitHub</a>.</p>
             </div>
         </div>
     </div>
@@ -78,8 +77,8 @@
         </div>
         <div class="col-md-6">
             <h2>Acknowledgements</h2>
-            <p>Satellite imagery by MapTiler Cloud. Ski areas layer obtained from NOAA NWS National Operational
-                Hydrologic Remote Sensing Center</p>
+            <p>Built on Bootstrap and MapLibre GL JS. Satellite imagery by MapTiler Cloud. Ski areas layer obtained from
+                NOAA NWS National Operational Hydrologic Remote Sensing Center and loaded with Protomaps' PMTiles.</p>
         </div>
     </div>
 
@@ -99,7 +98,8 @@
         // Initialize the map
         const map = new maplibregl.Map({
             container: 'map', // container ID
-            style: 'https://api.maptiler.com/maps/satellite/style.json?key=hhRnxfv423ZJi2JiGt95', // style URL, replace with your own style if necessary
+            // style URL, replace with your own style if desired
+            style: 'https://api.maptiler.com/maps/satellite/style.json?key=hhRnxfv423ZJi2JiGt95',
             center: [-95, 38], // starting position [lng, lat]
             zoom: 4 // starting zoom
         });
@@ -112,7 +112,7 @@
         map.on('load', function () {
             map.addSource('skiAreas', {
                 'type': 'vector',
-                'url': 'pmtiles://tiles/ski_areas_all.pmtiles'
+                'url': 'pmtiles://tiles/ski_areas_all.pmtiles' // path to tiles
             });
             map.addLayer({
                 'id': 'skiAreasCircles',
