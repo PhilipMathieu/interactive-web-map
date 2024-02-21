@@ -57,7 +57,12 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <h2>About</h2>
-                <p>This project demonstrates how to create an interactive web map for sharing geospatial projects. The web map consists of a single HTML file that uses Bootstrap to simplify styling. The map itself is rendered by MapLibre GL JS. Data is stored in the PMTiles format, a single-file format that simple to use and easy to deploy, making it a great choice for small to medium-sized datasets. Together, these packages make it possible to serve a fully-featured web map with static hosting services such as GitHub Pages.</p>
+                <p>This project demonstrates how to create an interactive web map for sharing geospatial projects. The
+                    web map consists of a single HTML file that uses Bootstrap to simplify styling. The map itself is
+                    rendered by MapLibre GL JS. Data is stored in the PMTiles format, a single-file format that simple
+                    to use and easy to deploy, making it a great choice for small to medium-sized datasets. Together,
+                    these packages make it possible to serve a fully-featured web map with static hosting services such
+                    as GitHub Pages.</p>
             </div>
             <div class="col-md-10">
                 <h2>Contact</h2>
@@ -113,6 +118,57 @@
         // Add zoom and rotation controls to the map.
         map.addControl(new maplibregl.NavigationControl());
 
+        // Example of adding a PMTiles source and layer to your map
+        map.on('load', function () {
+            map.addSource('skiAreas', {
+                'type': 'vector',
+                'url': 'pmtiles://tiles/ski_areas_all.pmtiles' // path to tiles
+            });
+            map.addLayer({
+                'id': 'skiAreasCircles',
+                'type': 'circle',
+                'source': 'skiAreas',
+                'source-layer': 'ski_areas_all',
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': 'rgba(255,255,255,0.5)'
+                }
+            });
+
+            let popup = null;
+
+            map.on('mouseenter', 'skiAreasCircles', function (e) {
+                // Change the cursor style as a UI indicator
+                map.getCanvas().style.cursor = 'pointer';
+
+                // Get the ski area name and coordinates from the feature properties
+                const skiAreaName = e.features[0].properties.NAME;
+                const lnglat = e.features[0].geometry.coordinates;
+                // Create a new popup if it doesn't exist
+                if (!popup) {
+                    popup = new maplibregl.Popup(
+                        {
+                            closeButton: false,
+                            closeOnClick: false
+                        }
+                    );
+                }
+
+                // Set the popup's coordinates and content
+                popup.setLngLat(lnglat).setHTML(skiAreaName).addTo(map);
+            });
+
+            map.on('mouseleave', 'skiAreasCircles', function () {
+                // Reset the cursor style
+                map.getCanvas().style.cursor = '';
+
+                // Remove the popup if it exists
+                if (popup) {
+                    popup.remove();
+                    popup = null;
+                }
+            });
+        });
 
         // Example of adding a PMTiles source and layer to your map
         map.on('load', function () {
