@@ -17,21 +17,29 @@
     <style>
         :root {
             /* Override Bootstrap colors */
-            --bs-primary: #007bff;
+            --bs-primary: #6384aa;
+            --bs-primary-rgb: 99, 132, 170;
             /* Primary color */
             --bs-secondary: #6c757d;
+            --bs-secondary-rgb: 108, 117, 125;
             /* Secondary color */
             --bs-success: #28a745;
+            --bs-success-rgb: 40, 167, 69;
             /* Success color */
             --bs-danger: #dc3545;
+            --bs-danger-rgb: 220, 53, 69;
             /* Danger color */
             --bs-warning: #ffc107;
+            --bs-warning-rgb: 255, 193, 7;
             /* Warning color */
             --bs-info: #17a2b8;
+            --bs-info-rgb: 23, 162, 184;
             /* Info color */
             --bs-light: #f8f9fa;
+            --bs-light-rgb: 248, 249, 250;
             /* Light color */
             --bs-dark: #343a40;
+            --bs-dark-rgb: 52, 58, 64;
             /* Dark color */
             --bs-font-sans-serif: "Inter", sans-serif;
             /* Override default font */
@@ -39,7 +47,7 @@
 
         #map {
             width: 100%;
-            height: 75vh;
+            height: 60vh;
             /* Adjust height as needed */
         }
     </style>
@@ -49,6 +57,10 @@
 <body>
     <div class="header bg-primary text-white text-center p-5">
         <h1 class="">Interactive Web Map</h1>
+        <a href="https://github.com/PhilipMathieu/interactive-web-map/">
+            <img src="https://img.shields.io/badge/GitHub-Repository-black?logo=github" alt="GitHub Repository">
+        </a>
+
     </div>
 
     <div id="map" class=""></div>
@@ -111,12 +123,15 @@
             container: 'map', // container ID
             // style URL, replace with your own style if desired
             style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
-            center: [-95, 38], // starting position [lng, lat]
+            center: [-95, 40], // starting position [lng, lat]
             zoom: 4 // starting zoom
         });
 
         // Add zoom and rotation controls to the map.
         map.addControl(new maplibregl.NavigationControl());
+
+        // disable map zoom when using scroll
+        map.scrollZoom.disable();
 
         // Example of adding a PMTiles source and layer to your map
         map.on('load', function () {
