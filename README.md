@@ -82,4 +82,4 @@ To deploy the map, push the changes to the `main` branch and enable GitHub Pages
 3. Select the `/docs` folder
 4. Click "Save"
 
-The map will be available at `https://YOUR_GITHUB_USERNAME.github.io/YOUR_PROJECT_NAME/`.
+The map will be available at [https://YOUR_GITHUB_USERNAME.github.io/YOUR_PROJECT_NAME/](https://YOUR_GITHUB_USERNAME.github.io/YOUR_PROJECT_NAME/).
