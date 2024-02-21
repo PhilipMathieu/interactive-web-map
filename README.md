@@ -4,7 +4,7 @@ This project demonstrates how to create an interactive web map for sharing geosp
 
 [View Site](https://philipmathieu.github.io/interactive-web-map/)
 
-This project was created by Philip Mathieu. If you like my work, consider [buying me a coffee](https://www.buymeacoffee.com/philipmathieu)!
+This project was created with the `cookiecutter-bootstrap-maplibre-pmtiles` template, originally authored by Philip Mathieu. If you like my work, consider [buying me a coffee](https://www.buymeacoffee.com/philipmathieu)!
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/philipmathieu)
 
@@ -50,7 +50,7 @@ maplibregl.addProtocol("pmtiles", protocol.tile);
 // Create a new map instance
 const map = new maplibregl.Map({
     container: 'map', // container ID
-    style: 'https://api.maptiler.com/maps/satellite/style.json?key=MAPTILER_API_KEY', // style URL, replace with your own style if necessary
+    style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', // style URL, replace with your own style if necessary
     center: [0, 0], // starting position [lng, lat]
     zoom: 1 // starting zoom
 });
@@ -77,11 +77,11 @@ map.on('load', function () {
 
 ## 4. Deploy with GitHub Pages
 
-To deploy the map, push the changes to the `main` branch and enable GitHub Pages in the repository settings (https://github.com/YOUR_GITHUB_UERNAME/YOUR_PROJECT_NAME/settings/pages).
+To deploy the map, push the changes to the `main` branch and enable GitHub Pages in the repository settings (https://github.com/PhilipMathieu/interactive-web-map/settings/pages).
 
 1. Under "Build and Deployment" choose "Deploy from a branch"
 2. Select the `main` branch
 3. Select the `/docs` folder
 4. Click "Save"
 
-The map will be available at [https://YOUR_GITHUB_USERNAME.github.io/YOUR_PROJECT_NAME/](https://YOUR_GITHUB_USERNAME.github.io/YOUR_PROJECT_NAME/).
+The map will be available at [https://philipmathieu.github.io/interactive-web-map/](https://philipmathieu.github.io/interactive-web-map/).
