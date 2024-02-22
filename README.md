@@ -10,8 +10,9 @@ This project was created with the `cookiecutter-bootstrap-maplibre-pmtiles` temp
 
 ## 1. Prepare Dataset
 
-This project assumes that you are working with a GeoJSON data source. If you are working with a different format, you will need to convert it to GeoJSON with a tool such as [GDAL](https://gdal.org/index.html) before proceeding. An example dataset is included in the `data/example` folder.
+This project assumes that you are working with a GeoJSON data source. If you are working with a different format, you will need to convert it to GeoJSON before proceeding. An example dataset is included in the `data/example` folder.
 
+### Converting to GeoJSON with GeoPandas
 In the case that you are coming from a `geopandas` project, you can convert the `GeoDataFrame` to GeoJSON with the following code:
 
 ```python
@@ -22,13 +23,23 @@ gdf = gpd.GeoDataFrame()
 gdf.to_file("path/to/file.geojson", driver="GeoJSON")
 ```
 
-For more information on geopandas, see the [geopandas documentation](https://geopandas.org/).
+There are lots of great tutorials on how to turn a regular Pandas DataFrame into a GeoDataFrame - for those and more documentation, see the [geopandas documentation](https://geopandas.org/).
+
+### Converting to GeoJSON with GDAL
+
+The "industry standard" tool for converting between geospatial data formats is [GDAL](https://gdal.org/index.html). It requires a steep learning curve if you have never worked with geospatial formats before, but ultimately is a swiss army knife capable of handling nearly any type of input and output. To illustrate this, the following command is used in the Protomaps documentation to turn a US Census shapefile into GeoJSON:
+
+```bash
+ogr2ogr -t_srs EPSG:4326 cb_2018_us_zcta510_500k.json cb_2018_us_zcta510_500k.shp
+```
+
+If you think you know what's going on in that command, you may be ready for GDAL - otherwise, I suggest starting with GeoPandas.
 
 ## 2. Convert to PMTiles Format
 
 Download and install `tippecanoe` (v2.17 or later) following [the instructions in the GitHub repository](https://github.com/felt/tippecanoe#installation).
 
-Note: `tippecanoe` is only compatible with Unix-based systems. If you are using Windows, you can use the Windows Subsystem for Linux (WSL) to run `tippecanoe`. You can also run install and run the command in a Docker container such as [`osgeo/gdal`](https://github.com/OSGeo/gdal/pkgs/container/gdal).
+Note: `tippecanoe` is only compatible with Unix-based systems. If you are using Windows, you can use the Windows Subsystem for Linux (WSL) to run `tippecanoe`. You can also install and run the command in a Docker container such as [`osgeo/gdal`](https://github.com/OSGeo/gdal/pkgs/container/gdal).
 
 To convert the file, run the following command:
 
